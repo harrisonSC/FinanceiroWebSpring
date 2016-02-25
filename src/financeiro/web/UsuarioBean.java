@@ -31,6 +31,18 @@ public class UsuarioBean {
 		this.confirmarSenha = this.usuario.getSenha();
 		return "/publico/usuario";
 	}
+
+	public String atribuiPermissao(Usuario usuario, String permissao){
+		this.usuario = usuario;
+		java.util.Set<String> permissoes = this.usuario.getPermissao();
+		if (permissoes.contains(permissao)) {
+			permissoes.remove(permissao);
+		}else {
+			permissoes.add(permissao);
+		}
+		return null;
+	}
+	
 	
 	public String salvar(){
 		FacesContext contex = FacesContext.getCurrentInstance();
