@@ -1,1 +1,1 @@
-<% response.sendRedirect("publico/login.jsf"); %>
+<% response.sendRedirect("restrito/principal.jsf"); %>
