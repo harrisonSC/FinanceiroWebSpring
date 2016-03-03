@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import financeiro.conta.Conta;
+import financeiro.conta.ContaRN;
+import financeiro.web.util.ContextoUtil;
 
 @ManagedBean(name = "contaBean")
 @RequestScoped
@@ -15,21 +17,31 @@ public class ContaBean {
 	private Conta selecionada = new Conta();
 	private List<Conta> lista = null;
 
-
 	public void salvar() {
+		ContextoBean contextoBean = ContextoUtil.getContextoBean();
+		this.selecionada.setUsuario(contextoBean.getUsuarioLogado());
+		ContaRN contaRN = new ContaRN();
+		contaRN.salvar(this.selecionada);
+		this.selecionada = new Conta();
+		this.lista = null;
 
 	}
 
 	public void editar() {
 
 	}
-	
-	public void excluir() {
 
+	public void excluir() {
+		ContaRN contaRN = new ContaRN();
+		contaRN.excluir(this.selecionada);
+		this.selecionada = new Conta();
+		this.lista = null;
 	}
 
 	public void tornarFavorita() {
-
+		ContaRN contaRN = new ContaRN();
+		contaRN.tornarFavorita(this.selecionada);
+		this.selecionada = new Conta();
 	}
 
 	public Conta getSelecionada() {
@@ -41,13 +53,11 @@ public class ContaBean {
 	}
 
 	public List<Conta> getLista() {
-		return lista;
+		if (this.lista == null) {
+			ContextoBean contextoBean = ContextoUtil.getContextoBean();
+			ContaRN contaRN = new ContaRN();
+			this.lista = contaRN.listar(contextoBean.getUsuarioLogado());
+		}
+		return this.lista;
 	}
-
-	public void setLista(List<Conta> lista) {
-		this.lista = lista;
-	}
-
-	
-
 }
