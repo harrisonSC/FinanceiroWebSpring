@@ -27,6 +27,7 @@ public class CategoriaDAOHibernate implements CategoriaDAO {
 	@Override
 	public void excluir(Categoria categoria) {
 		categoria = (Categoria) this.carregar(categoria.getCodigo());
+		System.out.println(categoria.getCodigo());
 		this.session.delete(categoria);
 		this.session.flush();
 		this.session.clear();
