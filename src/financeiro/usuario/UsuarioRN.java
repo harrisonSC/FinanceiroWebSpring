@@ -16,7 +16,7 @@ public class UsuarioRN {
 		return this.usuarioDAO.carregar(codigo);
 	}
 
-	public Usuario buscarporLogin(String login) {
+	public Usuario buscarPorLogin(String login) {
 		return this.usuarioDAO.buscarPorLogin(login);
 	}
 
