@@ -36,7 +36,10 @@ public void setSession(Session session){
 
 	@Override
 	public Usuario carregar(Integer codigo) {
-		return (Usuario) this.session.createCriteria(Usuario.class).list();
+		//return (Usuario) this.session.createCriteria(Usuario.class).list();
+		//TODO o hibernate nao conseguira fazer a carga caso seja passado o Usuario
+		// no parametro, tem que ser diretamente a chave (integer)
+		return (Usuario) this.session.get(Usuario.class, codigo);
 	}
 
 
